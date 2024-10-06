@@ -1,0 +1,100 @@
+<section class="my-5 py-5">
+	<h2 class="text-center text-main-color">My Orders</h2>
+	<div class="container py-5">
+		<div ngbAccordion #accordion="ngbAccordion">
+			<div ngbAccordionItem="first" #first="ngbAccordionItem" [collapsed]="true">
+				<div ngbAccordionHeader class="accordion-button custom-header justify-content-between">
+					<div class="w-100 row justify-content-start gap-3 align-items-center">
+						<div class="col-2 fw-bold">Id</div>
+						<div class="col-2 fw-bold">Paid</div>
+						<div class="col-2 fw-bold">Delivered</div>
+						<div class="col-2 fw-bold">Type</div>
+						<div class="col-2 fw-bold">Total</div>
+					</div>
+				</div>
+			</div>
+			@for (item of getUserOrders(); track item.id) {
+			<div ngbAccordionItem>
+				<h2 ngbAccordionHeader>
+					<button ngbAccordionButton>
+						<div class="w-100 row justify-content-start gap-3 align-items-center">
+							<div class="fw-bold col-2">{{item.id}}</div>
+							<div class="col-2">
+								@if (item.isPaid) {
+								<span class="badge text-bg-success">Paid</span>
+								}@else {<span class="badge text-bg-danger">Not Paid</span>}
+							</div>
+							<div class="col-2">
+								@if (item.isDelivered) {
+								<span class="badge text-bg-success">Delivered</span>
+								}@else {<span class="badge text-bg-secondary">Not Delivered</span>}
+							</div>
+							<div class="col-2">
+								@if (item.paymentMethodType === 'card') {
+								{{item.paymentMethodType}} <i class="fa-solid fa-credit-card"></i>
+								}@else if (item.paymentMethodType === 'cash') {
+								{{item.paymentMethodType}}<i class="fa-solid fa-money-bill"></i>
+								}
+							</div>
+							<div class="col-2">E{{item.totalOrderPrice | currency:'GBP'}}</div>
+						</div>
+					</button>
+				</h2>
+				<div ngbAccordionCollapse>
+					<div ngbAccordionBody>
+						<ng-template>
+							@for (i of item.cartItems; track i._id) {
+							<div class="row border-1 border-bottom">
+								<div class="col-1">
+									<img [src]="i.product.imageCover" [alt]="i.product.title" class="w-100">
+								</div>
+								<div class="col-2 flexx">
+									<span class="w-100 d-block text-main-color">{{i.product.title}}</span>
+									<span class="w-100 d-block">quantity: {{i.count}}</span>
+									<span class="w-100 d-block fw-bold">Price: E{{i.price|
+										currency:'GBP'}}</span>
+								</div>
+								<div class="col-3 flexx">
+									<span class="d-block w-100">
+										<strong>Shipping fee:</strong>E{{item.shippingPrice |
+										currency:'GBP'}}
+									</span>
+									<span class="d-block w-100">
+										<strong>Tax :</strong>E{{item.taxPrice |
+										currency:'GBP'}}
+									</span>
+								</div>
+								<div class="col-3 flexx">
+									<span class="d-block w-100">
+										<strong>Order Time:</strong>
+										{{item.createdAt | date:'medium' }}
+									</span>
+									<span class="d-block w-100">
+										<strong>Payment Time:</strong> {{item.paidAt | date:'medium'}}
+									</span>
+									<span class="d-block w-100">
+										<strong>Last Modification:</strong> {{item.updatedAt | date:'medium'}}
+									</span>
+								</div>
+								<div class="col-3 ">
+									<h5 class="text-center mb-1">Shippin Address :</h5>
+									<span class="d-block">
+										<strong>City</strong>: {{item.shippingAddress.city}}
+									</span>
+									<span class="d-block">
+										<strong>phone</strong>: {{item.shippingAddress.phone}}
+									</span>
+									<span class="d-block">
+										<strong>details</strong>: {{item.shippingAddress.details}}
+									</span>
+								</div>
+							</div>
+							}
+						</ng-template>
+					</div>
+				</div>
+			</div>
+			}
+		</div>
+	</div>
+</section>

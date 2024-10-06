@@ -1,0 +1,87 @@
+<section class="my-5 py-5">
+	<h2 class="text-center text-main-color">Your Shipping Address</h2>
+	<div class="container">
+		<div class="row">
+			<form [formGroup]="shippingForm" (ngSubmit)="checkOut()">
+				<div class="form-floating my-3">
+					<input [ngClass]="{
+							'is-valid':
+								!shippingForm.get('details')?.errors &&
+								shippingForm.get('details')?.touched,
+							'is-invalid':
+								shippingForm.get('details')?.errors &&
+								shippingForm.get('details')?.touched
+						}" formControlName="details" type="text" class="form-control mb-3" id="floatingInputDetails"
+						placeholder="Details ... " />
+					<label for="floatingInputDetails">Details</label>
+				</div>
+				@if (shippingForm.get('details')?.errors &&
+				shippingForm.get('details')?.touched ||
+				shippingForm.get('details')?.errors &&
+				shippingForm.get('details')?.dirty ) {
+				<div class="alert alert-danger">
+					@if (shippingForm.get('details')?.getError('required')) {
+					<p class="m-0">details is Required</p>
+					} @if (shippingForm.get('details')?.getError('minlength')) {
+					<p class="m-0">
+						At least 3 characters
+					</p>
+					}
+				</div>
+				}
+				<!-- Phone Input -->
+				<div class="form-floating my-3">
+					<input [ngClass]="{
+						'is-valid':
+							!shippingForm.get('phone')?.errors &&
+							shippingForm.get('phone')?.touched,
+						'is-invalid':
+							shippingForm.get('phone')?.errors &&
+							shippingForm.get('phone')?.touched
+					}" formControlName="phone" type="tel" class="form-control mb-3" id="floatingInputPhone"
+						placeholder="Phone Number" />
+					<label for="floatingInputPhone">Phone Number</label>
+				</div>
+				@if (shippingForm.get('phone')?.errors &&
+				shippingForm.get('phone')?.touched ||
+				shippingForm.get('phone')?.errors &&
+				shippingForm.get('phone')?.dirty ) {
+				<div class="alert alert-danger">
+					@if (shippingForm.get('phone')?.getError('required')) {
+					<p class="m-0">Phone is Required</p>
+					} @if (shippingForm.get('phone')?.getError('pattern')) {
+					<p class="m-0">Your Phone Should be like 01012345678</p>
+					}
+				</div>
+				}
+				<div class="form-floating my-3">
+					<input [ngClass]="{
+							'is-valid':
+								!shippingForm.get('city')?.errors &&
+								shippingForm.get('city')?.touched,
+							'is-invalid':
+								shippingForm.get('city')?.errors &&
+								shippingForm.get('city')?.touched
+						}" formControlName="city" type="text" class="form-control mb-3" id="floatingInputcity" placeholder="city ... " />
+					<label for="floatingInputcity">City</label>
+				</div>
+				@if (
+				(shippingForm.get('city')?.errors && shippingForm.get('city')?.touched )
+				||
+				(shippingForm.get('city')?.errors && shippingForm.get('city')?.dirty)) {
+				<div class="alert alert-danger">
+					@if (shippingForm.get('city')?.getError('required')) {
+					<p class="m-0">City is Required</p>
+					} @if (shippingForm.get('city')?.getError('maxlength')) {
+					<p class="m-0">
+						Max is 15 chars
+					</p>
+					}
+				</div>
+				}
+				<button [disabled]="this.shippingForm.invalid" class="btn btn-outline-success w-100">Pay Now</button>
+			</form>
+
+		</div>
+	</div>
+</section>

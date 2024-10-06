@@ -1,0 +1,36 @@
+@if (AllCategoriesRes()) {
+<div class="container my-5 py-5">
+	<div class="row g-4">
+		@for (cat of AllCategoriesRes(); track cat._id) {
+		<div class="col-md-4">
+			<div class="card pointer" (click)="AllSubCategoriesOnCategory(cat._id,cat.name)">
+				<div class="card-img w-100 overflow-hidden" style="height: 300px;">
+					<img src="{{cat.image}}" class="img-fluid ratio-4x3 w-100" style="height: inherit;"
+						alt="{{cat.name}}">
+				</div>
+				<div class="card-body">
+					<p class="text-success h3 text-center">{{cat.name}}</p>
+				</div>
+			</div>
+		</div>
+		}
+	</div>
+</div>
+}
+
+<!-- Sub Categories Section -->
+<section class="my-4 container">
+	@if (AllSubCategoriesOnCategoryRes())
+	{
+	<h2 class="text-center text-main-color my-4">{{SubCategoryName()}}</h2>
+	<div class="row gy-3">
+		@for (item of AllSubCategoriesOnCategoryRes(); track item._id) {
+		<div class="col-md-4">
+			<div class="card pointer">
+				<p class="h4 text-center p-3">{{item.name}}</p>
+			</div>
+		</div>
+		}
+	</div>
+	}
+</section>

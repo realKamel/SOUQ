@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Importing Bootstrap SCSS file. */
+@import "bootstrap/scss/bootstrap";
+:root {
+	--main-color: #4fa74f;
+}
+
+.card {
+	transition: all 0.5s;
+	position: relative;
+}
+.card:hover {
+	box-shadow: 1px 1px 10px var(--main-color);
+}
+.flexx {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.bg-main-green {
+	background-color: var(--main-color) !important;
+	color: white;
+}
+.text-main-color {
+	color: var(--main-color);
+}
+.fs-\[2rem\] {
+	font-size: 2rem;
+}
+.pointer {
+	cursor: pointer;
+}
+
+.fa-solid {
+	transition: all 0.5s;
+}

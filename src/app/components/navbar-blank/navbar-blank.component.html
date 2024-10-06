@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top py-3">
+	<div class="container">
+		<div routerLink="home" class="text-center pointer d-flex justify-content-center align-items-center gap-1">
+			<div>
+				<i class="fa-solid fa-cart-shopping text-main-color nav-icon"></i>
+			</div>
+			<span class="navbar-brand h3">Fresh Cart</span>
+		</div>
+		<button class="navbar-toggler border-0 text-black" type="button" (click)="toggleCollapse()">
+			<i class="fa-solid fa-bars"></i>
+		</button>
+		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
+			<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link" routerLink="home" routerLinkActive="rounded bg-main-green text-white"
+						aria-current="page">Home</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="rounded bg-main-green text-white"
+						routerLink="product">Products</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="rounded bg-main-green text-white"
+						routerLink="categories">Categories</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="rounded bg-main-green text-white"
+						routerLink="brands">Brands</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="rounded bg-main-green text-white" routerLink="allorders">My
+						Orders</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLinkActive="rounded bg-main-green text-white" routerLink="wishlist">My
+						Wishlist</a>
+				</li>
+			</ul>
+			<div class="d-flex justify-content-center align-items-center gap-3">
+				<div routerLink="cart" routerLinkActive="bg-main-green"
+					class=" position-relative p-2 rounded w-full justify-content-center align-items-center text center pointer">
+					<i class="fa-solid fa-cart-shopping fa-xl ">
+					</i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
+						{{this.navCartCounter()}}
+					</span>
+				</div>
+				<div>
+					<a class="nav-link pointer" (click)="logOut()" aria-current="page">Log Out</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</nav>

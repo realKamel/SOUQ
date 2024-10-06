@@ -1,0 +1,43 @@
+<!-- Static Carousel -->
+<section class="my-5 p-5 w-100 my-static-carousel mx-auto">
+	<div class="row">
+		<div class="col-md-6">
+			<owl-carousel-o [options]="staticCustomOptions">
+				<ng-template carouselSlide>
+					<img class="w-100" src="./assets/Imgs/StaticCarousel_img1_slider.jpg" alt="" />
+				</ng-template>
+				<ng-template carouselSlide>
+					<img class="w-100" src="./assets/Imgs/StaticCarousel_img2_slider.jpg" alt="" />
+				</ng-template>
+				<ng-template carouselSlide>
+					<img class="w-100" src="./assets/Imgs/StaticCarousel_img3_slider.jpg" alt="" />
+				</ng-template>
+			</owl-carousel-o>
+		</div>
+		<div class="col-md-6">
+			<div>
+				<img class="w-100" src="./assets/Imgs/StaticCarousel_img1_.jpg" alt="" />
+			</div>
+			<div>
+				<img class="w-100" src="./assets/Imgs/StaticCarousel_img2_.jpg" alt="" />
+			</div>
+		</div>
+	</div>
+</section>
+
+<!-- Cateigory Carousel -->
+<section class="">
+	<owl-carousel-o [options]="catCustomOptions">
+		@for (cat of allCategoriesRes(); track cat._id) {
+		<ng-template carouselSlide>
+			<img [src]="cat.image" class="my-carousel-img" style="height: 250px" [alt]="cat.name" [title]="cat.name" />
+			<h3 class="text-black h3 text-center">{{ cat.name }}</h3>
+		</ng-template>
+		}
+	</owl-carousel-o>
+</section>
+
+<!-- Products -->
+<section class="py-5 bg-white rounded-2">
+	<app-product></app-product>
+</section>

@@ -1,0 +1,63 @@
+<div class="container m-4 py-4">
+	@if (SpcificProdRes()) {
+	<section>
+		<div class="row w-100 justify-content-center align-items-center">
+			<div class="col-md-4">
+				<owl-carousel-o [options]="customOptions" class="w-100">
+					@for (SpcificProdimage of SpcificProdRes().images; track
+					$index) {
+					<ng-template carouselSlide>
+						<img
+							class="w-100"
+							[src]="SpcificProdimage"
+							[alt]="SpcificProdRes().title"
+							[title]="SpcificProdRes().title"
+						/>
+					</ng-template>
+					}
+				</owl-carousel-o>
+			</div>
+			<div class="col-md-8">
+				<h2>{{ SpcificProdRes().title }}</h2>
+				<p>{{ SpcificProdRes().description }}</p>
+				<div>
+					<div class="flexx justify-content-between my-3">
+						<div>
+							E{{ SpcificProdRes().price | currency : "GBP" }}
+						</div>
+						<div class="stars flexx gap-2">
+							<ng-template #t let-fill="fill">
+								<i class="bi bi-star-fill">
+									@if (fill > 0) {
+									<i
+										class="bi bi-star-fill filled"
+										[style.width.%]="fill"
+									></i>
+									}
+								</i>
+							</ng-template>
+							<ngb-rating
+								[(rate)]="SpcificProdRes().ratingsAverage"
+								[starTemplate]="t"
+								[readonly]="true"
+								[max]="5"
+							/>
+							<span>{{ SpcificProdRes().ratingsAverage }}</span>
+						</div>
+					</div>
+					<div class="flexx justify-content-around">
+						<a class="add-btn btn d-block w-75">
+							+ Add
+							<i class="fa-solid fa-cart-shopping text-white"></i>
+						</a>
+						<span class="d-block w-25 d-flex justify-content-end">
+							<i class="fa-solid fa-heart fs-2 pointer"></i>
+						</span>
+					</div>
+				</div>
+				<div></div>
+			</div>
+		</div>
+	</section>
+	}
+</div>

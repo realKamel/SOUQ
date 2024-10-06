@@ -1,0 +1,45 @@
+@if (getLoggedUserCartRes()) {
+<section class="container my-5 py-5">
+	<div class="container py-5 my-5 p-5 bg-light rounded">
+		<div class="d-flex justify-content-between mb-4">
+			<h2>Cart Shop</h2>
+			<button [routerLink]="['/checkOut',getLoggedUserCartRes()._id]" class="btn btn-primary btn-lg ">Check
+				Out</button>
+		</div>
+		<div class="d-flex justify-content-between align-items-center ">
+			<h5>Total price: <span class="text-main-color">{{getLoggedUserCartRes().totalCartPrice}}</span></h5>
+			<h5>total number of items: <span class="text-main-color">{{this._CartService.numOfCartItems()}}</span>
+			</h5>
+		</div>
+		@for (item of getLoggedUserCartRes().products; track item._id ) {
+		<div class="row border-bottom my-3 d-flex align-items-center p-2">
+			<div class="col-md-2">
+				<img [src]="item.product.imageCover" class="w-100" alt="">
+			</div>
+			<div class="col-md-10 d-flex justify-content-between">
+				<div>
+					<h5>{{item.product.title}}</h5>
+					<h6 class="text-main-color">E{{ item.price| currency : "GBP" }}</h6>
+					<button (click)="this.removeItemFromCart(item.product._id)" class="btn btn-sm m-0 p-0 text-danger">
+						<i class="fa-solid fa-trash"></i>
+						Remove
+					</button>
+				</div>
+				<div class="flexx">
+					<button (click)="updateCartProduct(item.product._id,item.count+1)" style="height: 35px;width: 35px;"
+						class="border-0 flexx bg-main-green rounded-circle pointer">
+						<i class="fa-solid fa-plus fa-1"></i></button>
+					<button class="btn fs-3">{{item.count}}</button>
+					<button (click)="updateCartProduct(item.product._id,item.count-1)" style="height: 35px;width: 35px;"
+						class="border-0 flexx bg-main-green rounded-circle pointer">
+						<i class="fa-solid fa-minus fa-1"></i></button>
+				</div>
+			</div>
+		</div>
+
+		}
+		<button (click)="clearCart()" class="btn btn-lg btn-danger d-block mx-auto ">Clear Your Cart</button>
+	</div>
+</section>
+
+}

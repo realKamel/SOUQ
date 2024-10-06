@@ -1,0 +1,76 @@
+<section>
+	<div class="container my-5 py-5">
+		<h2>Login</h2>
+		<form class="mt-3" [formGroup]="logInForm" (ngSubmit)="submitLogInForm()">
+			<!-- Email Input -->
+			<div class="form-floating my-3">
+				<input [ngClass]="{
+						'is-valid':
+							!logInForm.get('email')?.errors &&
+							logInForm.get('email')?.touched,
+						'is-invalid':
+							logInForm.get('email')?.errors &&
+							logInForm.get('email')?.touched
+					}" formControlName="email" type="email" class="form-control mb-3" id="floatingInputEmail"
+					placeholder="name@example.com" />
+				<label for="floatingInputEmail">Email address</label>
+			</div>
+			@if ((logInForm.get('email')?.errors && logInForm.get('email')?.touched)
+			||
+			logInForm.get('email')?.errors && logInForm.get('email')?.dirty) {
+			<div class="alert alert-danger">
+				@if (logInForm.get('email')?.getError('required')) {
+				<p class="m-0">Email is Required</p>
+				} @if (logInForm.get('email')?.getError('email')) {
+				<p class="m-0">
+					Your Email Should be in a Valid Format Like
+					mail"&#64;"mail.com
+				</p>
+				}
+			</div>
+			}
+
+			<!-- Password Input -->
+			<div class="form-floating my-3">
+				<input [ngClass]="{
+						'is-valid':
+							!logInForm.get('password')?.errors &&
+							logInForm.get('password')?.touched,
+						'is-invalid':
+							logInForm.get('password')?.errors &&
+							logInForm.get('password')?.touched
+					}" formControlName="password" type="password" class="form-control mb-3" id="floatingPassword"
+					placeholder="Password" />
+				<label for="floatingPassword">Password</label>
+			</div>
+			@if ((logInForm.get('password')?.errors &&
+			logInForm.get('password')?.touched) ||
+			(logInForm.get('password')?.errors &&
+			logInForm.get('password')?.dirty)) {
+			<div class="alert alert-danger">
+				@if (logInForm.get('password')?.getError('required')) {
+				<p class="m-0">Password is Required</p>
+				} @if (logInForm.get('password')?.getError('pattern')) {
+				<p class="m-0">Password Must be longer than 6 Characters</p>
+				}
+			</div>
+			}
+
+			<div>
+				<div class="alert p-0">
+					<a [routerLink]="['/forget']"
+						class="link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover">
+						Forget Password ?
+					</a>
+				</div>
+				<!-- Submit Button -->
+				<button [disabled]="logInForm.invalid || isLoading()" type="submit"
+					class="btn btn-success btn-lg d-block ms-auto">
+					@if (isLoading()) {
+					<i class="fa-solid fa-spinner fa-spin"></i>
+					}@else { Login }
+				</button>
+			</div>
+		</form>
+	</div>
+</section>
