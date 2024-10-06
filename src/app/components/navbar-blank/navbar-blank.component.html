@@ -1,91 +1,99 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top py-3">
-	<div class="container">
-		<div
-			routerLink="home"
-			class="text-center pointer d-flex justify-content-center align-items-center gap-1">
-			<div class="logo rounded-2 text-white">SOUQ</div>
+<div class="navbar bg-base-100 flex items-center justify-between gap-4">
+	<div class="w-1/4 md:w-1/6 flexx">
+		<span class="rounded-md cursor-pointer text-info p-2 text-2xl">SOUQ</span>
+	</div>
+	<div class="w-3/4 md:w-5/6 flex justify-between">
+		<div class="w-8/12 relative">
+			<i
+				class="fa-solid fa-magnifying-glass absolute top-1/2 -translate-y-1/2 left-2 text-gray-400"></i>
+			<input
+				type="text"
+				placeholder="Search"
+				class="w-full me-4 input input-bordered ps-10" />
 		</div>
-		<button
-			class="navbar-toggler border-0 text-black"
-			type="button"
-			(click)="toggleCollapse()">
-			<i class="fa-solid fa-bars"></i>
-		</button>
-		<div
-			[ngbCollapse]="isMenuCollapsed()"
-			class="collapse navbar-collapse">
-			<ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						routerLink="home"
-						routerLinkActive="rounded bg-main-green text-white"
-						aria-current="page"
-						>Home</a
-					>
-				</li>
+		<div class="hidden md:block w-4/12">
+			<div class="flex gap-4 justify-evenly w-full text-gray-400">
+				<button
+					class="block"
+					routerLink="home"
+					routerLinkActive="text-primary">
+					<div class="flex flex-col gap-1 justify-center">
+						<i class="fa-solid fa-house"></i>
+						<span class="font-normal text-sm">Home</span>
+					</div>
+				</button>
 
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						routerLinkActive="rounded bg-main-green text-white"
-						routerLink="product"
-						>Products</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						routerLinkActive="rounded bg-main-green text-white"
-						routerLink="categories"
-						>Categories</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						routerLinkActive="rounded bg-main-green text-white"
-						routerLink="brands"
-						>Brands</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						routerLinkActive="rounded bg-main-green text-white"
-						routerLink="allorders"
-						>My Orders</a
-					>
-				</li>
-				<li class="nav-item">
-					<a
-						class="nav-link"
-						routerLinkActive="rounded bg-main-green text-white"
-						routerLink="wishlist"
-						>My Wishlist</a
-					>
-				</li>
-			</ul>
-			<div class="d-flex justify-content-center align-items-center gap-3">
-				<div
+				<button
+					routerLink="wishlist"
+					routerLinkActive="text-primary">
+					<div class="flex flex-col gap-1 justify-center">
+						<i class="fa-solid fa-heart"></i>
+						<span class="font-normal text-sm">Wishlist</span>
+					</div>
+				</button>
+				<button
 					routerLink="cart"
-					routerLinkActive="bg-main-green"
-					class="position-relative p-2 rounded w-full justify-content-center align-items-center text center pointer">
-					<i class="fa-solid fa-cart-shopping fa-xl"> </i>
-					<span
-						class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-secondary">
-						{{ this.navCartCounter() }}
-					</span>
-				</div>
-				<div>
-					<a
-						class="nav-link pointer"
-						(click)="logOut()"
-						aria-current="page"
-						>Log Out</a
-					>
-				</div>
+					routerLinkActive="text-primary">
+					<div class="flex flex-col gap-1 justify-center">
+						<i class="fa-solid fa-cart-shopping"></i>
+						<span class="font-normal text-sm">Cart</span>
+					</div>
+				</button>
+				<button
+					routerLink="profile"
+					routerLinkActive="text-primary">
+					<div class="flex flex-col gap-1 justify-center">
+						<i class="fa-solid fa-user"></i>
+						<span class="font-normal text-sm">Me</span>
+					</div>
+				</button>
 			</div>
 		</div>
 	</div>
-</nav>
+</div>
+
+<div class="md:hidden">
+	<div class="btm-nav shadow-md z-50 text-gray-400">
+		<button
+			class=""
+			routerLink="home"
+			routerLinkActive="text-primary">
+			<div class="flex flex-col gap-1 justify-center">
+				<i class="fa-solid fa-house"></i>
+				<span class="font-normal text-sm">Home</span>
+			</div>
+		</button>
+		<button
+			routerLink="categories"
+			routerLinkActive="text-primary">
+			<div class="flex flex-col gap-1 justify-center">
+				<i class="fa-solid fa-layer-group"></i>
+				<span class="font-normal text-sm">Categories</span>
+			</div>
+		</button>
+		<button
+			routerLink="wishlist"
+			routerLinkActive="text-primary">
+			<div class="flex flex-col gap-1 justify-center">
+				<i class="fa-solid fa-heart"></i>
+				<span class="font-normal text-sm">Wishlist</span>
+			</div>
+		</button>
+		<button
+			routerLink="cart"
+			routerLinkActive="text-primary">
+			<div class="flex flex-col gap-1 justify-center">
+				<i class="fa-solid fa-cart-shopping"></i>
+				<span class="font-normal text-sm">Cart</span>
+			</div>
+		</button>
+		<button
+			routerLink="profile"
+			routerLinkActive="text-primary">
+			<div class="flex flex-col gap-1 justify-center">
+				<i class="fa-solid fa-user"></i>
+				<span class="font-normal text-sm">Me</span>
+			</div>
+		</button>
+	</div>
+</div>

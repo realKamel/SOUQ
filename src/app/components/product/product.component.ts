@@ -33,7 +33,7 @@ import { ToastrService } from "ngx-toastr";
 	templateUrl: "./product.component.html",
 	styleUrl: "./product.component.scss",
 })
-export class ProductComponent implements OnInit, OnDestroy {
+export class ProductComponent implements  OnDestroy {
 	private readonly _ProductsService = inject(ProductsService);
 	private readonly _WishlistService = inject(WishlistService);
 	private readonly _CartService = inject(CartService);
@@ -46,7 +46,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 	private addProductToWishlistSub!: Subscription;
 	private addProductToCartSub!: Subscription;
 
-	ngOnInit() {
+	/* ngOnInit() {
 		this.getLoggedUserWishlistSub = this._WishlistService
 			.getLoggedUserWishlist()
 			.subscribe({
@@ -78,7 +78,7 @@ export class ProductComponent implements OnInit, OnDestroy {
 				},
 			});
 	}
-	onInput(event: Event) {
+ */	onInput(event: Event) {
 		const inputElement = event.target as HTMLInputElement;
 		this.searchTerm.set(inputElement.value);
 	}

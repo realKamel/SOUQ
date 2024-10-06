@@ -1,23 +1,5 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary py-3">
-	<div class="container">
-		<div routerLink="home" class="text-center pointer d-flex justify-content-center align-items-center gap-1">
-			<div>
-				<i class="fa-solid fa-cart-shopping text-main-color nav-icon"></i>
-			</div>
-			<a class="navbar-brand d-block h3 bold">Fresh Cart</a>
-		</div>
-		<button class="navbar-toggler border-0 text-black" type="button" (click)="isMenuCollapsed = !isMenuCollapsed">
-			<i class="fa-solid fa-bars"></i></button>
-		<div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse">
-			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="rounded bg-main-green text-white"
-						routerLink="register">Register</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" routerLinkActive="rounded bg-main-green text-white" routerLink="login">Login</a>
-				</li>
-			</ul>
-		</div>
+<div class="navbar bg-base-100 flex items-center justify-center gap-4">
+	<div class="flexx">
+		<span class="rounded-md cursor-pointer text-info p-2 text-2xl">SOUQ</span>
 	</div>
-</nav>
+</div>

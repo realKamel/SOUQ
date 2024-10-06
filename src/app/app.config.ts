@@ -15,7 +15,6 @@ import { headerInterceptor } from "./interceptors/header.interceptor";
 import { errorInterceptor } from "./interceptors/error.interceptor";
 import { provideToastr } from "ngx-toastr";
 
-
 export const appConfig: ApplicationConfig = {
 	providers: [
 		provideRouter(
