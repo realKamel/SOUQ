@@ -1,11 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
-@import "bootstrap/scss/bootstrap";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 :root {
 	--main-color: #4fa74f;
 }
-
+body {
+	background: #dbdbdb;
+}
+.logo {
+	background-color: rgb(0, 89, 255);
+	width: 100%;
+	height: 100%;
+	font-weight: bold;
+	font-size: larger;
+	padding: 5px;
+}
 .card {
 	transition: all 0.5s;
 	position: relative;
@@ -27,13 +39,9 @@
 .text-main-color {
 	color: var(--main-color);
 }
-.fs-\[2rem\] {
-	font-size: 2rem;
-}
 .pointer {
 	cursor: pointer;
 }
-
 .fa-solid {
 	transition: all 0.5s;
 }

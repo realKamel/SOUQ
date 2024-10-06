@@ -13,7 +13,6 @@ import { provideAnimations } from "@angular/platform-browser/animations";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { headerInterceptor } from "./interceptors/header.interceptor";
 import { errorInterceptor } from "./interceptors/error.interceptor";
-import { loadingInterceptor } from "./interceptors/loading.interceptor";
 import { provideToastr } from "ngx-toastr";
 import { NgxSpinnerModule } from "ngx-spinner";
 
