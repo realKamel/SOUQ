@@ -1,15 +1,15 @@
 import {
-  ActivatedRoute,
-  NavigationEnd,
-  Router
-} from "./chunk-6JFR62HO.js";
-import {
   animate,
   state,
   style,
   transition,
   trigger
 } from "./chunk-P76NW5TY.js";
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router
+} from "./chunk-6JFR62HO.js";
 import "./chunk-MQOX2MMM.js";
 import "./chunk-YKHKSWUR.js";
 import {

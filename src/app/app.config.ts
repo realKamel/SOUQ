@@ -14,7 +14,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { headerInterceptor } from "./interceptors/header.interceptor";
 import { errorInterceptor } from "./interceptors/error.interceptor";
 import { provideToastr } from "ngx-toastr";
-import { NgxSpinnerModule } from "ngx-spinner";
+
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -29,7 +29,7 @@ export const appConfig: ApplicationConfig = {
 		provideClientHydration(),
 		provideHttpClient(withFetch(), withInterceptors([headerInterceptor, errorInterceptor])),
 		provideAnimations(),
-		importProvidersFrom(NgbModule, RouterModule, NgxSpinnerModule),
+		importProvidersFrom(NgbModule, RouterModule),
 		provideToastr()
 	]
 };
