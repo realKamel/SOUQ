@@ -1,11 +1,4 @@
-import {
-	Component,
-	inject,
-	OnDestroy,
-	OnInit,
-	signal,
-	WritableSignal,
-} from "@angular/core";
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from "@angular/core";
 import { ProductsService } from "../../services/products.service";
 import { IProduct } from "../../interfaces/iproduct";
 import { finalize, Subscription } from "rxjs";
@@ -22,18 +15,11 @@ import { ToastrService } from "ngx-toastr";
 @Component({
 	selector: "app-product",
 	standalone: true,
-	imports: [
-		NgbRating,
-		RouterLink,
-		FormsModule,
-		SearchFilterPipe,
-		CurrencyPipe,
-		NgClass,
-	],
+	imports: [NgbRating, RouterLink, FormsModule, SearchFilterPipe, CurrencyPipe, NgClass],
 	templateUrl: "./product.component.html",
-	styleUrl: "./product.component.scss",
+	styleUrl: "./product.component.scss"
 })
-export class ProductComponent implements  OnDestroy {
+export class ProductComponent implements OnDestroy {
 	private readonly _ProductsService = inject(ProductsService);
 	private readonly _WishlistService = inject(WishlistService);
 	private readonly _CartService = inject(CartService);
@@ -78,7 +64,8 @@ export class ProductComponent implements  OnDestroy {
 				},
 			});
 	}
- */	onInput(event: Event) {
+ */
+	onInput(event: Event) {
 		const inputElement = event.target as HTMLInputElement;
 		this.searchTerm.set(inputElement.value);
 	}
@@ -90,9 +77,7 @@ export class ProductComponent implements  OnDestroy {
 					finalize(() => {
 						this.allProdRes().map((product: IProduct) => {
 							product.inWishList =
-								this._WishlistService.inWishListProudctsIds.includes(
-									product.id
-								);
+								this._WishlistService.inWishListProudctsIds.includes(product.id);
 							return product;
 						});
 					})
@@ -103,7 +88,7 @@ export class ProductComponent implements  OnDestroy {
 					},
 					error: (err) => {
 						console.error(err);
-					},
+					}
 				});
 		} else {
 			this.addProductToWishlistSub = this._WishlistService
@@ -112,9 +97,7 @@ export class ProductComponent implements  OnDestroy {
 					finalize(() => {
 						this.allProdRes().map((product: IProduct) => {
 							product.inWishList =
-								this._WishlistService.inWishListProudctsIds.includes(
-									product.id
-								);
+								this._WishlistService.inWishListProudctsIds.includes(product.id);
 							return product;
 						});
 					})
@@ -126,20 +109,18 @@ export class ProductComponent implements  OnDestroy {
 					},
 					error: (err) => {
 						console.error(err);
-					},
+					}
 				});
 		}
 	}
 	addToCart(id: string) {
-		this.addProductToCartSub = this._CartService
-			.addProductToCart(id)
-			.subscribe({
-				next: (res) => {
-					console.log(res.message);
-					this._CartService.numOfCartItems.set(res.numOfCartItems);
-					this._ToastrService.success(res.message);
-				},
-			});
+		this.addProductToCartSub = this._CartService.addProductToCart(id).subscribe({
+			next: (res) => {
+				console.log(res.message);
+				this._CartService.numOfCartItems.set(res.numOfCartItems);
+				this._ToastrService.success(res.message);
+			}
+		});
 	}
 	ngOnDestroy(): void {
 		this.removeProductFromWishlistSub?.unsubscribe();

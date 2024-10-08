@@ -25,12 +25,17 @@
 	</div>
 </section> -->
 
-<!-- Cateigory Carousel -->
+<!-- Category Carousel -->
 <section class="">
 	<owl-carousel-o [options]="catCustomOptions">
 		@for (cat of allCategoriesRes(); track cat._id) {
 		<ng-template carouselSlide>
-			<img [src]="cat.image" class="my-carousel-img" style="height: 250px" [alt]="cat.name" [title]="cat.name" />
+			<img
+				[src]="cat.image"
+				class="my-carousel-img"
+				style="height: 250px"
+				[alt]="cat.name"
+				[title]="cat.name" />
 			<h3 class="text-black h3 text-center">{{ cat.name }}</h3>
 		</ng-template>
 		}

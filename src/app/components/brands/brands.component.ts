@@ -5,52 +5,50 @@ import {
 	OnInit,
 	signal,
 	TemplateRef,
-	WritableSignal,
+	WritableSignal
 } from "@angular/core";
 import { ModalDismissReasons, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { BrandsService } from "../../services/brands.service";
 import { IBrand } from "../../interfaces/ibrand";
-import { Subscription } from "rxjs";
+import { Subject, Subscription, takeUntil } from "rxjs";
 
 @Component({
 	selector: "app-brands",
 	standalone: true,
 	imports: [],
 	templateUrl: "./brands.component.html",
-	styleUrl: "./brands.component.scss",
+	styleUrl: "./brands.component.scss"
 })
 export class BrandsComponent implements OnInit, OnDestroy {
-	private modalService = inject(NgbModal);
-	private _BrandsService = inject(BrandsService);
+	private readonly modalService = inject(NgbModal);
+	private readonly _BrandsService = inject(BrandsService);
 	closeResult: WritableSignal<string> = signal("");
 	AllBrands: WritableSignal<IBrand[]> = signal([]);
+	private readonly destroy$ = new Subject<void>();
 	AllBrandsSubscription!: Subscription;
 
 	ngOnInit(): void {
-		this.AllBrandsSubscription = this._BrandsService
+		this._BrandsService
 			.getAllBrands()
+			.pipe(takeUntil(this.destroy$))
 			.subscribe({
 				next: (res) => {
 					this.AllBrands.set(res.data);
 				},
 				error: (err) => {
 					console.error(err);
-				},
+				}
 			});
 	}
 	open(content: TemplateRef<any>) {
-		this.modalService
-			.open(content, { ariaLabelledBy: "modal-basic-title" })
-			.result.then(
-				(result) => {
-					this.closeResult.set(`Closed with: ${result}`);
-				},
-				(reason) => {
-					this.closeResult.set(
-						`Dismissed ${this.getDismissReason(reason)}`
-					);
-				}
-			);
+		this.modalService.open(content, { ariaLabelledBy: "modal-basic-title" }).result.then(
+			(result) => {
+				this.closeResult.set(`Closed with: ${result}`);
+			},
+			(reason) => {
+				this.closeResult.set(`Dismissed ${this.getDismissReason(reason)}`);
+			}
+		);
 	}
 	private getDismissReason(reason: any): string {
 		switch (reason) {
@@ -63,6 +61,7 @@ export class BrandsComponent implements OnInit, OnDestroy {
 		}
 	}
 	ngOnDestroy(): void {
-		this.AllBrandsSubscription?.unsubscribe();
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }

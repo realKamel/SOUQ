@@ -3,7 +3,7 @@
 	<div class="row g-4">
 		@for (cat of AllCategoriesRes(); track cat._id) {
 		<div class="col-md-4">
-			<div class="card pointer" (click)="AllSubCategoriesOnCategory(cat._id,cat.name)">
+			<div class="card cursor-pointer" (click)="AllSubCategoriesOnCategory(cat._id,cat.name)">
 				<div class="card-img w-100 overflow-hidden" style="height: 300px;">
 					<img src="{{cat.image}}" class="img-fluid ratio-4x3 w-100" style="height: inherit;"
 						alt="{{cat.name}}">
@@ -26,7 +26,7 @@
 	<div class="row gy-3">
 		@for (item of AllSubCategoriesOnCategoryRes(); track item._id) {
 		<div class="col-md-4">
-			<div class="card pointer">
+			<div class="card cursor-pointer">
 				<p class="h4 text-center p-3">{{item.name}}</p>
 			</div>
 		</div>

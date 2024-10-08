@@ -1,12 +1,5 @@
-import {
-	Component,
-	inject,
-	OnDestroy,
-	OnInit,
-	signal,
-	WritableSignal,
-} from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, inject, OnDestroy, OnInit, signal, WritableSignal } from "@angular/core";
+import { Subject, takeUntil } from "rxjs";
 import { RouterLink } from "@angular/router";
 import { CarouselModule, OwlOptions } from "ngx-owl-carousel-o";
 import { CategoriesService } from "../../services/categories.service";
@@ -18,13 +11,13 @@ import { ProductComponent } from "../product/product.component";
 	standalone: true,
 	imports: [RouterLink, CarouselModule, ProductComponent],
 	templateUrl: "./home.component.html",
-	styleUrl: "./home.component.scss",
+	styleUrl: "./home.component.scss"
 })
 export class HomeComponent implements OnInit, OnDestroy {
 	private readonly _CategoriesService = inject(CategoriesService);
 	allCategoriesRes: WritableSignal<ICategory[]> = signal([]);
 	searchTerm: WritableSignal<string> = signal("");
-	private allCategoriesSub!: Subscription;
+	private readonly destroy$ = new Subject<void>();
 	catCustomOptions: OwlOptions = {
 		loop: true,
 		mouseDrag: false,
@@ -35,19 +28,19 @@ export class HomeComponent implements OnInit, OnDestroy {
 		navText: ["", ""],
 		responsive: {
 			0: {
-				items: 1,
+				items: 1
 			},
 			400: {
-				items: 2,
+				items: 2
 			},
 			740: {
-				items: 4,
+				items: 4
 			},
 			940: {
-				items: 6,
-			},
+				items: 6
+			}
 		},
-		nav: true,
+		nav: true
 	};
 	staticCustomOptions: OwlOptions = {
 		loop: true,
@@ -59,33 +52,35 @@ export class HomeComponent implements OnInit, OnDestroy {
 		navText: ["", ""],
 		responsive: {
 			0: {
-				items: 1,
+				items: 1
 			},
 			400: {
-				items: 1,
+				items: 1
 			},
 			740: {
-				items: 2,
+				items: 2
 			},
 			940: {
-				items: 4,
-			},
+				items: 4
+			}
 		},
-		nav: true,
+		nav: true
 	};
 	ngOnInit(): void {
-		this.allCategoriesSub = this._CategoriesService
+		this._CategoriesService
 			.getAllCategories()
+			.pipe(takeUntil(this.destroy$))
 			.subscribe({
 				next: (res) => {
 					this.allCategoriesRes.set(res.data);
 				},
 				error: (err) => {
 					console.error(err);
-				},
+				}
 			});
 	}
 	ngOnDestroy(): void {
-		this.allCategoriesSub?.unsubscribe();
+		this.destroy$.next();
+		this.destroy$.complete();
 	}
 }
