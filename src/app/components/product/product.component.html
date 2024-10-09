@@ -1,17 +1,25 @@
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
 <section class="py-5 bg-white rounded-2">
 	<div class="form-floating my-5 w-75 mx-auto">
-		<input [value]="searchTerm()" (input)="onInput($event)" type="search" class="form-control" id="floatingInput"
+		<input
+			[value]="searchTerm()"
+			(input)="onInput($event)"
+			type="search"
+			class="form-control"
+			id="floatingInput"
 			placeholder=" Search by name ..." />
 		<label for="floatingInput"> Search by name ...</label>
 	</div>
 	<div class="row justify-content-start align-items-center g-3">
-		@if (allProdRes()) {
-		@for (prod of allProdRes() | searchFilter : searchTerm() ; track prod._id) {
+		@if (allProdRes()) { @for (prod of allProdRes() | searchFilter : searchTerm() ; track
+		prod._id) {
 		<div class="col-md-6 col-lg-3 flexx">
 			<div class="card border-0 col-sm-12 px-2 rounded overflow-hidden">
-				<img [routerLink]="['/ProductDetails', prod._id]" [src]="prod.imageCover"
-					class="card-img-top w-100 rounded" alt="{{ prod.title }}" />
+				<img
+					[routerLink]="['/ProductDetails', prod._id]"
+					[src]="prod.imageCover"
+					class="card-img-top w-100 rounded"
+					alt="{{ prod.title }}" />
 				<div class="card-body">
 					<div [routerLink]="['/ProductDetails', prod._id]">
 						<p class="text-main-color">{{ prod.category.name }}</p>
@@ -19,40 +27,45 @@
 							{{ prod.title.split(" ", 2).join(" ") }}
 						</h5>
 						<div class="flexx justify-content-between my-2">
-							<div class="fw-bold">
-								E{{ prod.price | currency : "GBP" }}
-							</div>
+							<div class="fw-bold">E{{ prod.price | currency : "GBP" }}</div>
 							<div class="stars flexx gap-2">
-								<ng-template #t let-fill="fill">
+								<ng-template
+									#t
+									let-fill="fill">
 									<i class="bi bi-star-fill">
 										@if (fill > 0) {
-										<i class="bi bi-star-fill filled" [style.width.%]="fill"></i>
+										<i
+											class="bi bi-star-fill filled"
+											[style.width.%]="fill"></i>
 										}
 									</i>
 								</ng-template>
-								<ngb-rating [(rate)]="prod.ratingsAverage" [starTemplate]="t" [readonly]="true"
-									[max]="5" />
+								<!-- <ngb-rating [(rate)]="prod.ratingsAverage" [starTemplate]="t" [readonly]="true"
+									[max]="5" /> -->
 								<span>{{ prod.ratingsAverage }}</span>
 							</div>
 						</div>
 					</div>
 					<div class="flexx justify-content-between">
-						<button (click)="addToCart(prod._id)" class="add-btn btn bg-main-green d-block w-75">
+						<button
+							(click)="addToCart(prod._id)"
+							class="add-btn btn bg-main-green d-block w-75">
 							+ Add
 							<i class="fa-solid fa-cart-shopping text-white"></i>
 						</button>
 						<span class="d-block w-25 d-flex justify-content-end">
-							<button (click)="addOrRemoveFromWishlist(prod.id,prod.inWishList)" class="btn">
-								<i [ngClass]="{ 'make-red': prod.inWishList }"
+							<button
+								(click)="addOrRemoveFromWishlist(prod.id, prod.inWishList)"
+								class="btn">
+								<i
+									[ngClass]="{ 'make-red': prod.inWishList }"
 									class="fa-solid fa-heart fs-2 cursor-pointer"></i>
 							</button>
-
 						</span>
 					</div>
 				</div>
 			</div>
 		</div>
-		}
-		}
+		} }
 	</div>
 </section>
