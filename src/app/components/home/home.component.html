@@ -26,20 +26,32 @@
 </section> -->
 
 <!-- Category Carousel -->
-<section class="">
+<!-- <section class="">
 	<owl-carousel-o [options]="catCustomOptions">
-		@for (cat of allCategoriesRes(); track cat._id) {
-		<ng-template carouselSlide>
-			<img
-				[src]="cat.image"
-				class="my-carousel-img"
-				style="height: 250px"
-				[alt]="cat.name"
-				[title]="cat.name" />
-			<h3 class="text-black h3 text-center">{{ cat.name }}</h3>
-		</ng-template>
-		}
+		
 	</owl-carousel-o>
+</section> -->
+
+<!-- New Slider -->
+<section>
+	<h2 class="text-2xl">Featured Categories</h2>
+	<div class="swiper mySwiper">
+		<div class="swiper-wrapper p-2">
+			@for (cat of allCategoriesRes(); track cat._id) {
+			<div class="swiper-slide size[250px] flex justify-center items-center flex-col">
+				<div class="border h-full border-gray-900 rounded-full">
+					<img
+						[src]="cat.image"
+						class="rounded-full w-full object-center object-contain"
+						[alt]="cat.name"
+						[title]="cat.name" />
+				</div>
+				<h3 class="text-black h3 text-center">{{ cat.name }}</h3>
+			</div>
+			}
+		</div>
+		<div class="swiper-scrollbar"></div>
+	</div>
 </section>
 
 <!-- Products -->

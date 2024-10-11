@@ -59,7 +59,6 @@ export class ProductComponent implements OnInit, OnDestroy {
 				}
 			});
 	}
-
 	onInput(event: Event) {
 		const inputElement = event.target as HTMLInputElement;
 		this.searchTerm.set(inputElement.value);

@@ -1,5 +1,5 @@
 <!-- eslint-disable @angular-eslint/template/click-events-have-key-events -->
-<section class="py-5 bg-white rounded-2">
+<section class="py-5 bg-base-100 rounded-2">
 	<div class="form-floating my-5 w-75 mx-auto">
 		<input
 			[value]="searchTerm()"
@@ -10,62 +10,56 @@
 			placeholder=" Search by name ..." />
 		<label for="floatingInput"> Search by name ...</label>
 	</div>
-	<div class="row justify-content-start align-items-center g-3">
+	<div class="row d-flex justify-content-center align-items-start g-1">
 		@if (allProdRes()) { @for (prod of allProdRes() | searchFilter : searchTerm() ; track
-		prod._id) {
-		<div class="col-md-6 col-lg-3 flexx">
-			<div class="card border-0 col-sm-12 px-2 rounded overflow-hidden">
-				<img
-					[routerLink]="['/ProductDetails', prod._id]"
-					[src]="prod.imageCover"
-					class="card-img-top w-100 rounded"
-					alt="{{ prod.title }}" />
-				<div class="card-body">
-					<div [routerLink]="['/ProductDetails', prod._id]">
-						<p class="text-main-color">{{ prod.category.name }}</p>
-						<h5 class="card-title">
-							{{ prod.title.split(" ", 2).join(" ") }}
-						</h5>
-						<div class="flexx justify-content-between my-2">
-							<div class="fw-bold">E{{ prod.price | currency : "GBP" }}</div>
-							<div class="stars flexx gap-2">
-								<ng-template
-									#t
-									let-fill="fill">
-									<i class="bi bi-star-fill">
-										@if (fill > 0) {
-										<i
-											class="bi bi-star-fill filled"
-											[style.width.%]="fill"></i>
-										}
-									</i>
-								</ng-template>
-								<!-- <ngb-rating [(rate)]="prod.ratingsAverage" [starTemplate]="t" [readonly]="true"
-									[max]="5" /> -->
-								<span>{{ prod.ratingsAverage }}</span>
-							</div>
+		prod._id){
+		<div class="col-6 col-sm-4 col-md-3">
+			<div class="rounded bg-base-100 w-full shadow-md border border-black">
+				<figure class="px-2 pt-2 flexx">
+					<img
+						[routerLink]="['/ProductDetails', prod._id]"
+						[src]="prod.imageCover"
+						alt="{{ prod.title }}"
+						class="rounded-md size-[150px] object-cover object-center cursor-pointer" />
+				</figure>
+				<div class="p-2 flex flex-wrap gap-2 justify-start items-start">
+					<h2
+						[routerLink]="['/ProductDetails', prod._id]"
+						class="card-title text-sm md:text-lg cursor-pointer text-nowrap w-full">
+						{{ prod.title.split(" ", 2).join(" ") }}
+					</h2>
+					<div class="card-actions flex-wrap w-full">
+						<div
+							class="badge md:text-xs text-nowrap text-[10px] badge-outline hover:cursor-pointer duration-300 hover:bg-blue-300 hover:shadow">
+							{{ prod.brand.name }}
+						</div>
+						<div
+							class="badge md:text-xs text-nowrap text-[10px] badge-outline hover:cursor-pointer duration-300 hover:bg-blue-300 hover:shadow">
+							{{ prod.category.name }}
 						</div>
 					</div>
-					<div class="flexx justify-content-between">
+					<div class="w-full flexx justify-content-start">
+						@for (i of [1,2,3,4,5].slice(0,prod.ratingsAverage) ; track $index) {
+						<i class="fa-solid fa-star text-yellow-500"></i>
+						} @for (i of [1,2,3,4,5].slice(prod.ratingsAverage) ; track $index) {
+						<i class="fa-regular fa-star text-[#d3d3d3]"></i>
+						}
+						<span class="badge badge-outline text-[10px]">{{ prod.ratingsAverage }}</span>
+					</div>
+					<div class="card-actions">
 						<button
 							(click)="addToCart(prod._id)"
-							class="add-btn btn bg-main-green d-block w-75">
-							+ Add
-							<i class="fa-solid fa-cart-shopping text-white"></i>
+							class="btn btn-primary p-1 cursor-pointer duration-300 group/btn">
+							Add to Cart
+							<span class="hidden duration-300 group-hover/btn:block">
+								<i class="fa-solid fa-cart-arrow-down text-white"></i>
+							</span>
 						</button>
-						<span class="d-block w-25 d-flex justify-content-end">
-							<button
-								(click)="addOrRemoveFromWishlist(prod.id, prod.inWishList)"
-								class="btn">
-								<i
-									[ngClass]="{ 'make-red': prod.inWishList }"
-									class="fa-solid fa-heart fs-2 cursor-pointer"></i>
-							</button>
-						</span>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		} }
 	</div>
 </section>
