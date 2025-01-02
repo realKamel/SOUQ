@@ -44,7 +44,7 @@ export class BlankComponent implements AfterViewInit {
 		this._Renderer2.setStyle(
 			this.blankBody.nativeElement,
 			'marginTop',
-			'100px'
+			'98px'
 		);
 	}
 }
