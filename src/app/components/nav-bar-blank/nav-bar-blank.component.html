@@ -1,10 +1,10 @@
 <nav
 	#navbar
-	class="bg-white fixed top-0 w-full border-gray-200 dark:bg-gray-900 rounded-b-md shadow-sm mb-1"
+	class="bg-white bg-opacity-85 backdrop-blur-sm z-50 fixed top-0 w-full border-gray-200 dark:bg-gray-900 rounded-b-md shadow-sm mb-1"
 >
 	<div
 		class="max-w-screen-2xl row flex-wrap items-center justify-content-evenly mx-auto duration-300"
-		[class]="isScrolled() ? 'p-2' : 'p-4'"
+		[class]="this._NavbarBlankService.isScrolled() ? 'p-2' : 'p-4'"
 	>
 		<a
 			class="flex col-2 items-center justify-center space-x-3 rtl:space-x-reverse"
@@ -32,10 +32,10 @@
 				[(ngModel)]="q"
 				placeholder="What do you think of ? ... "
 			/>
-			{{ q() }}
 		</div>
 		<div class="col-3 row justify-center items-center">
 			<div
+				routerLink="wishlist"
 				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 			>
 				<lucide-icon
@@ -49,6 +49,7 @@
 			</div>
 			<p-divider styleClass="col-1" layout="vertical"></p-divider>
 			<div
+				routerLink="cart"
 				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 			>
 				<lucide-icon
@@ -62,6 +63,7 @@
 			</div>
 			<p-divider styleClass="col-1" layout="vertical"></p-divider>
 			<div
+				routerLink="profile"
 				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 			>
 				<lucide-icon

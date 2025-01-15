@@ -1,0 +1,60 @@
+<div class="grid items-center pt-3 gap-2 grid-cols-12">
+	@for (item of productsList(); track item.id) {
+	<div class="md:col-span-3 col-span-5">
+		<div
+			[routerLink]="['/itemDetails', item.id]"
+			class="card grid grid-rows-2 p-3 rounded-md bg-white shadow border cursor-pointer"
+		>
+			<div class="row-span-1 flex justify-center items-center my-1">
+				<img [src]="item.image" class="h-[200px]" [alt]="item.title" />
+			</div>
+			<div class="body row-span-1 self-end cursor-auto">
+				<h2 class="text-lg">
+					{{ item.title.split(" ", 2).join(" ") }}
+				</h2>
+				<span class="text-muted-color">{{ item.rating.rate }}</span>
+				<p class="text-muted-color text-sm">
+					{{ item.description.split(" ", 15).join(" ") }}
+				</p>
+				<span class="">E{{ item.price | currency : "GBP" }}</span>
+				<div class="buttons mt-3 flex items-center">
+					<button
+						class="px-4 py-2 col-10 bg-blue-500 hover:bg-blue-400 duration-300 text-white rounded flex justify-center items-center text-nowrap"
+					>
+						Add To Cart
+						<lucide-icon
+							[img]="LucideIcon.ShoppingCart"
+							class="text-white hover:text-red-600 duration-300 ms-1"
+						>
+						</lucide-icon>
+					</button>
+					<span class="col-2 flex justify-end items-center">
+						<lucide-icon
+							[img]="LucideIcon.Heart"
+							size="25px"
+							class="my-icon text-muted-color"
+						>
+						</lucide-icon>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							width="25"
+							height="25"
+							viewBox="0 0 25 25"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							class="lucide lucide-heart"
+						>
+							<path
+								d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
+							/>
+						</svg>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	}
+</div>

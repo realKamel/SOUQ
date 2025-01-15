@@ -2,16 +2,16 @@ import {
 	AfterViewInit,
 	Component,
 	ElementRef,
-	HostListener,
 	inject,
 	PLATFORM_ID,
 	Renderer2,
-	ViewChild,
+	viewChild,
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavBarBlankComponent } from '../../components/nav-bar-blank/nav-bar-blank.component';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { isPlatformBrowser } from '@angular/common';
+import { NavbarBlankService } from '../../services/navbar-blank.service';
 
 @Component({
 	selector: 'app-blank',
@@ -20,31 +20,19 @@ import { isPlatformBrowser } from '@angular/common';
 	styleUrl: './blank.component.scss',
 })
 export class BlankComponent implements AfterViewInit {
-	scrollMeasure = 0;
-	@ViewChild('blankBody') blankBody!: ElementRef<HTMLDivElement>;
+	readonly _NavbarBlankService = inject(NavbarBlankService);
+
+	blankBody = viewChild<ElementRef<HTMLDivElement>>('blankBody');
 	private readonly _Renderer2 = inject(Renderer2);
 	private readonly _PLATFORM_ID = inject(PLATFORM_ID);
 
-	@HostListener('window:scroll', [])
-	onWindowScroll() {
-		// Change navbar style after scrolling navbar height pixels
-		console.log(`${this.scrollMeasure}`);
+	ngAfterViewInit(): void {
 		if (isPlatformBrowser(this._PLATFORM_ID)) {
 			this._Renderer2.setStyle(
-				this.blankBody.nativeElement,
+				this.blankBody()?.nativeElement,
 				'marginTop',
-				`${this.scrollMeasure + (96 - 64)}px`
+				`${this._NavbarBlankService.scrollMeasure() + 30}px`
 			);
 		}
-	}
-	handleScrollChange(scroll: number) {
-		this.scrollMeasure = scroll;
-	}
-	ngAfterViewInit(): void {
-		this._Renderer2.setStyle(
-			this.blankBody.nativeElement,
-			'marginTop',
-			'98px'
-		);
 	}
 }

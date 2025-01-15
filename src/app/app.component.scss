@@ -1,0 +1,18 @@
+.splash {
+	position: relative;
+	font-size: 10em;
+}
+
+.splash .text-wrapper {
+	position: relative;
+	display: inline-block;
+	padding-top: 0.2em;
+	padding-right: 0.05em;
+	padding-bottom: 0.1em;
+	overflow: hidden;
+}
+
+.splash .letter {
+	display: inline-block;
+	line-height: 1em;
+}
