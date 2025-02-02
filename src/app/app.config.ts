@@ -1,7 +1,7 @@
 import {
 	ApplicationConfig,
-	provideZoneChangeDetection,
 	importProvidersFrom,
+	provideExperimentalZonelessChangeDetection,
 } from '@angular/core';
 import {
 	provideRouter,
@@ -20,14 +20,12 @@ import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient, withFetch } from '@angular/common/http';
-import { providePrimeNG } from 'primeng/config';
-import Aura from '@primeng/themes/aura';
 
 registerLocaleData(en);
 
 export const appConfig: ApplicationConfig = {
 	providers: [
-		provideZoneChangeDetection({ eventCoalescing: true }),
+		provideExperimentalZonelessChangeDetection(),
 		provideRouter(
 			routes,
 			withInMemoryScrolling({
@@ -40,18 +38,5 @@ export const appConfig: ApplicationConfig = {
 		importProvidersFrom(FormsModule),
 		provideAnimationsAsync(),
 		provideHttpClient(withFetch()),
-		providePrimeNG({
-			theme: {
-				preset: Aura,
-				options: {
-					cssLayer: {
-						name: 'primeng',
-						order: 'tailwind-base, primeng, tailwind-utilities',
-					},
-					darkModeSelector: '.my-app-dark',
-				},
-			},
-			ripple: true,
-		}),
 	],
 };
