@@ -1,6 +1,7 @@
-@import "remixicon/fonts/remixicon.css";
-@import "tailwindcss";
-
+@use "remixicon/fonts/remixicon.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 body {
 	@apply bg-slate-100;
 }

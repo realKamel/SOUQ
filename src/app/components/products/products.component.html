@@ -5,8 +5,12 @@
 			[routerLink]="['/itemDetails', item.id]"
 			class="card grid grid-rows-2 p-3 rounded-md bg-white shadow border cursor-pointer"
 		>
-			<div class="row-span-1 flex justify-center items-center my-1">
-				<div class="h-[180px] w-full relative">
+			<div
+				class="row-span-1 flex justify-center items-center my-1 group/item"
+			>
+				<div
+					class="h-[180px] w-full relative group-hover/item:scale-110 duration-300"
+				>
 					<img
 						[ngSrc]="item.image"
 						class="object-contain"
