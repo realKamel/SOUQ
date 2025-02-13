@@ -9,30 +9,18 @@ import {
 } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
 import { Subject, takeUntil } from 'rxjs';
-import { CardModule } from 'primeng/card';
-import { ButtonModule } from 'primeng/button';
 import { IProducts } from '../../interfaces/iproducts';
-import { Heart, LucideAngularModule, ShoppingCart } from 'lucide-angular';
-import { CurrencyPipe } from '@angular/common';
+import { CurrencyPipe, NgOptimizedImage } from '@angular/common';
 import { RouterLink } from '@angular/router';
+
 @Component({
 	selector: 'app-products',
-	imports: [
-		ButtonModule,
-		CardModule,
-		LucideAngularModule,
-		CurrencyPipe,
-		RouterLink,
-	],
+	imports: [CurrencyPipe, RouterLink, NgOptimizedImage],
 	templateUrl: './products.component.html',
 	styleUrl: './products.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent implements OnInit, OnDestroy {
-	readonly LucideIcon = {
-		Heart: Heart,
-		ShoppingCart: ShoppingCart,
-	};
 	private readonly _ProductsService = inject(ProductsService);
 	private readonly Destroy$ = new Subject<void>();
 	productsList: WritableSignal<IProducts[]> = signal([]);

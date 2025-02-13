@@ -1,75 +1,117 @@
-<nav
+<!-- <nav
 	#navbar
-	class="bg-white bg-opacity-85 backdrop-blur-sm z-50 fixed top-0 w-full border-gray-200 dark:bg-gray-900 rounded-b-md shadow-sm mb-1"
+	class="bg-white bg-opacity-85 backdrop-blur-sm z-50 fixed top-0 w-full border-gray-200 rounded-b-md shadow-sm mb-1"
 >
 	<div
-		class="max-w-screen-2xl row flex-wrap items-center justify-content-evenly mx-auto duration-300"
+		class="max-w-screen-2xl grid grid-col-12 grid-row-1 items-center justify-content-evenly mx-auto duration-300"
 		[class]="this._NavbarBlankService.isScrolled() ? 'p-2' : 'p-4'"
 	>
 		<a
-			class="flex col-2 items-center justify-center space-x-3 rtl:space-x-reverse"
+			class="flex col-span-2 items-center justify-center space-x-3 rtl:space-x-reverse"
 			routerLink="home"
 		>
 			<span
-				class="text-2xl hover:opacity-70 cursor-pointer duration-300 font-semibold whitespace-nowrap dark:text-white text-blue-600"
+				class="text-2xl hover:opacity-70 cursor-pointer duration-300 font-semibold whitespace-nowrap text-blue-600"
 				>SOUQ</span
 			>
 		</a>
-		<div class="col-7 relative flex justify-center items-center">
+		<div class="col-span-7 relative justify-center items-center">
 			<div
 				class="absolute top-2 left-5 flex justify-center items-center text-gray-500"
-			>
-				<lucide-icon
-					class="text-gray-500"
-					[img]="lucideIcons['Search']"
-					class="my-icon"
-				></lucide-icon>
-			</div>
+			></div>
 			<input
-				class="w-full ps-9"
+				class="ps-9 w-72"
 				type="text"
 				pInputText
 				[(ngModel)]="q"
 				placeholder="What do you think of ? ... "
 			/>
 		</div>
-		<div class="col-3 row justify-center items-center">
+		<div class="col-span-3 row justify-center items-center">
 			<div
 				routerLink="wishlist"
 				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 			>
-				<lucide-icon
-					class="text-gray-500 group-hover/link:opacity-70 duration-300"
-					[img]="lucideIcons['Heart']"
-				></lucide-icon>
 				<span
 					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
 					>My Wishlist</span
 				>
 			</div>
-			<p-divider styleClass="col-1" layout="vertical"></p-divider>
 			<div
 				routerLink="cart"
 				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 			>
-				<lucide-icon
-					class="text-gray-500 group-hover/link:opacity-70 duration-300"
-					[img]="lucideIcons['ShoppingCart']"
-				></lucide-icon>
 				<span
 					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
 					>My Cart</span
 				>
 			</div>
-			<p-divider styleClass="col-1" layout="vertical"></p-divider>
 			<div
 				routerLink="profile"
 				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 			>
-				<lucide-icon
-					class="text-gray-500 group-hover/link:opacity-70 duration-300"
-					[img]="lucideIcons['CircleUserRound']"
-				></lucide-icon>
+				<span
+					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
+					>Me</span
+				>
+			</div>
+		</div>
+	</div>
+</nav> -->
+
+<nav
+	#navbar
+	class="bg-white p-1 bg-opacity-85 backdrop-blur-sm z-50 fixed top-0 w-full border-gray-200 rounded-b-md shadow-sm mb-1"
+>
+	<div
+		[class]="this._NavbarBlankService.isScrolled() ? 'p-0' : 'p-3'"
+		class="grid grid-cols-12 justify-items-center items-center mx-auto duration-300"
+	>
+		<a
+			class="col-span-2 items-center justify-center space-x-3 rtl:space-x-reverse"
+			routerLink="home"
+		>
+			<span
+				class="text-3xl hover:opacity-70 cursor-pointer duration-300 font-semibold whitespace-nowrap text-blue-600"
+				>SOUQ</span
+			>
+		</a>
+		<div class="col-span-7 p-1">
+			<input
+				class="w-96 p-2 border rounded"
+				type="search"
+				[(ngModel)]="q"
+				placeholder="What do you think of ? ... "
+			/>
+		</div>
+		<div
+			class="col-span-3 grid grid-cols-3 gap-3 justify-items-center justify-center items-center"
+		>
+			<div
+				routerLink="wishlist"
+				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+			>
+				<i class="ri-heart-line hover:ri-heart-fill text-2xl"></i>
+				<span
+					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
+					>My Wishlist</span
+				>
+			</div>
+			<div
+				routerLink="cart"
+				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+			>
+				<i class="ri-shopping-cart-line text-2xl"></i>
+				<span
+					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
+					>My Cart</span
+				>
+			</div>
+			<div
+				routerLink="profile"
+				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+			>
+				<i class="ri-user-line text-2xl"></i>
 				<span
 					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
 					>Me</span

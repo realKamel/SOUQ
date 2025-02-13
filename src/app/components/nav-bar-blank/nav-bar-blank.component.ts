@@ -2,7 +2,6 @@ import {
 	AfterViewInit,
 	ChangeDetectionStrategy,
 	Component,
-	CUSTOM_ELEMENTS_SCHEMA,
 	ElementRef,
 	inject,
 	OnDestroy,
@@ -12,16 +11,6 @@ import {
 	WritableSignal,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import {
-	LucideAngularModule,
-	Search,
-	Heart,
-	ShoppingCart,
-	CircleUserRound,
-} from 'lucide-angular';
-import { DividerModule } from 'primeng/divider';
 import { RouterLink } from '@angular/router';
 import { NavbarBlankService } from '../../services/navbar-blank.service';
 import { fromEvent, map, Observable, Subject, takeUntil } from 'rxjs';
@@ -29,18 +18,9 @@ import { isPlatformBrowser } from '@angular/common';
 
 @Component({
 	selector: 'app-nav-bar-blank',
-	imports: [
-		ButtonModule,
-		ReactiveFormsModule,
-		FormsModule,
-		InputTextModule,
-		LucideAngularModule,
-		DividerModule,
-		RouterLink,
-	],
+	imports: [ReactiveFormsModule, FormsModule, RouterLink],
 	templateUrl: './nav-bar-blank.component.html',
 	styleUrl: './nav-bar-blank.component.scss',
-	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavBarBlankComponent implements AfterViewInit, OnDestroy {
@@ -50,12 +30,7 @@ export class NavBarBlankComponent implements AfterViewInit, OnDestroy {
 
 	//Signal-Based Query
 	navbar = viewChild<ElementRef<HTMLDivElement>>('navbar');
-	lucideIcons = {
-		Search: Search,
-		Heart: Heart,
-		ShoppingCart: ShoppingCart,
-		CircleUserRound: CircleUserRound,
-	};
+
 	q: WritableSignal<string> = signal('');
 	windowScrollY: WritableSignal<number> = signal(0);
 	destroy$: Subject<void> = new Subject<void>();
@@ -83,6 +58,7 @@ export class NavBarBlankComponent implements AfterViewInit, OnDestroy {
 			});
 		}
 	}
+
 	//Hook to unsubscribe from observables
 	ngOnDestroy(): void {
 		this.destroy$.next();
