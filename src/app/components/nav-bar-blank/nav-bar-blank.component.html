@@ -1,122 +1,169 @@
-<!-- <nav
-	#navbar
-	class="bg-white bg-opacity-85 backdrop-blur-sm z-50 fixed top-0 w-full border-gray-200 rounded-b-md shadow-sm mb-1"
->
-	<div
-		class="max-w-screen-2xl grid grid-col-12 grid-row-1 items-center justify-content-evenly mx-auto duration-300"
-		[class]="this._NavbarBlankService.isScrolled() ? 'p-2' : 'p-4'"
-	>
-		<a
-			class="flex col-span-2 items-center justify-center space-x-3 rtl:space-x-reverse"
-			routerLink="home"
-		>
-			<span
-				class="text-2xl hover:opacity-70 cursor-pointer duration-300 font-semibold whitespace-nowrap text-blue-600"
-				>SOUQ</span
-			>
-		</a>
-		<div class="col-span-7 relative justify-center items-center">
-			<div
-				class="absolute top-2 left-5 flex justify-center items-center text-gray-500"
-			></div>
-			<input
-				class="ps-9 w-72"
-				type="text"
-				pInputText
-				[(ngModel)]="q"
-				placeholder="What do you think of ? ... "
-			/>
-		</div>
-		<div class="col-span-3 row justify-center items-center">
-			<div
-				routerLink="wishlist"
-				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
-			>
-				<span
-					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
-					>My Wishlist</span
-				>
-			</div>
-			<div
-				routerLink="cart"
-				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
-			>
-				<span
-					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
-					>My Cart</span
-				>
-			</div>
-			<div
-				routerLink="profile"
-				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
-			>
-				<span
-					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
-					>Me</span
-				>
-			</div>
-		</div>
-	</div>
-</nav> -->
-
 <nav
 	#navbar
-	class="bg-white p-1 bg-opacity-85 backdrop-blur-sm z-50 fixed top-0 w-full border-gray-200 rounded-b-md shadow-sm mb-1"
+	class="bg-white p-1 bg-opacity-85 backdrop-blur-sm z-50 fixed top-0 w-dvw border-gray-200 rounded-b-md shadow-sm mb-1"
 >
 	<div
-		[class]="this._NavbarBlankService.isScrolled() ? 'p-0' : 'p-3'"
-		class="grid grid-cols-12 justify-items-center items-center mx-auto duration-300"
+		[class]="this._NavbarBlankService.isScrolled() ? 'p-2' : 'p-4'"
+		class="grid grid-cols-12 justify-center items-center mx-auto gap-3 duration-200"
 	>
-		<a
-			class="col-span-2 items-center justify-center space-x-3 rtl:space-x-reverse"
-			routerLink="home"
-		>
-			<span
-				class="text-3xl hover:opacity-70 cursor-pointer duration-300 font-semibold whitespace-nowrap text-blue-600"
-				>SOUQ</span
-			>
-		</a>
-		<div class="col-span-7 p-1">
-			<input
-				class="w-96 p-2 border rounded"
-				type="search"
-				[(ngModel)]="q"
-				placeholder="What do you think of ? ... "
-			/>
+		<div class="col-span-2">
+			<div class="flex justify-center items-center">
+				<a
+					class="items-center justify-center space-x-3 rtl:space-x-reverse"
+					routerLink="home"
+				>
+					<span
+						class="text-3xl hover:opacity-70 cursor-pointer duration-300 font-semibold whitespace-nowrap text-blue-600"
+						>SOUQ</span
+					>
+				</a>
+			</div>
 		</div>
-		<div
-			class="col-span-3 grid grid-cols-3 gap-3 justify-items-center justify-center items-center"
-		>
+
+		<input
+			class="col-span-9 justify-self-end md:justify-self-auto md:col-span-7 p-2 border rounded block"
+			type="search"
+			[(ngModel)]="q"
+			placeholder="What do you think of ? ..."
+		/>
+		<div class="col-span-1">
+			<button>
+				<i
+					class="ri-search-2-line text-2xl cursor-pointer text-blue-700"
+				></i>
+			</button>
+		</div>
+		<!-- For Desktop Screen -->
+		<div class="md:block hidden col-span-3">
 			<div
-				routerLink="wishlist"
-				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+				class="col-span-1 md:col-span-3 grid grid-cols-3 gap-3 justify-items-center justify-center items-center"
 			>
-				<i class="ri-heart-line hover:ri-heart-fill text-2xl"></i>
-				<span
-					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
-					>My Wishlist</span
+				<div
+					routerLink="wishlist"
+					routerLinkActive="active"
+					class="text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 				>
-			</div>
-			<div
-				routerLink="cart"
-				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
-			>
-				<i class="ri-shopping-cart-line text-2xl"></i>
-				<span
-					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
-					>My Cart</span
+					<i
+						[ngClass]="
+							currentRoute() === '/wishlist'
+								? 'ri-heart-fill'
+								: 'ri-heart-line'
+						"
+						class="text-2xl text-inherit duration-200"
+					></i>
+					<span class="text-nowrap text-inherit duration-200"
+						>My Wishlist</span
+					>
+				</div>
+				<div
+					routerLink="cart"
+					routerLinkActive="active"
+					class="text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 				>
-			</div>
-			<div
-				routerLink="profile"
-				class="col-2 text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
-			>
-				<i class="ri-user-line text-2xl"></i>
-				<span
-					class="text-nowrap text-inherit group-hover/link:opacity-70 duration-300"
-					>Me</span
+					<i
+						[ngClass]="
+							currentRoute() === '/cart'
+								? 'ri-shopping-cart-fill'
+								: 'ri-shopping-cart-line'
+						"
+						class="text-2xl text-inherit duration-200"
+					></i>
+					<span class="text-nowrap text-inherit duration-200"
+						>My Cart</span
+					>
+				</div>
+				<div
+					routerLink="profile"
+					routerLinkActive="active"
+					class="text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
 				>
+					<i
+						[ngClass]="
+							currentRoute() === '/profile'
+								? 'ri-user-fill'
+								: 'ri-user-line'
+						"
+						class="text-2xl text-inherit duration-200"
+					></i>
+					<span class="text-nowrap text-inherit duration-200"
+						>Me</span
+					>
+				</div>
 			</div>
 		</div>
 	</div>
 </nav>
+
+<!-- mobile-navbar -->
+<div
+	class="bg-white p-1 bg-opacity-85 backdrop-blur-sm z-50 fixed bottom-0 w-full border-gray-200 rounded-t-md shadow-sm"
+>
+	<div class="md:hidden meus-list">
+		<div class="grid grid-cols-4">
+			<div
+				routerLink="home"
+				routerLinkActive="active"
+				class="text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+			>
+				<i
+					[ngClass]="
+						currentRoute() === '/home'
+							? 'ri-home-fill'
+							: 'ri-home-line'
+					"
+					class="text-2xl text-inherit duration-200"
+				></i>
+				<span class="text-nowrap text-inherit duration-200">Home</span>
+			</div>
+			<div
+				routerLink="wishlist"
+				routerLinkActive="active"
+				class="text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+			>
+				<i
+					[ngClass]="
+						currentRoute() === '/wishlist'
+							? 'ri-heart-fill'
+							: 'ri-heart-line'
+					"
+					class="text-2xl text-inherit duration-200"
+				></i>
+				<span class="text-nowrap text-inherit duration-200"
+					>My Wishlist</span
+				>
+			</div>
+			<div
+				routerLink="cart"
+				routerLinkActive="active"
+				class="text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+			>
+				<i
+					[ngClass]="
+						currentRoute() === '/cart'
+							? 'ri-shopping-cart-fill'
+							: 'ri-shopping-cart-line'
+					"
+					class="text-2xl text-inherit duration-200"
+				></i>
+				<span class="text-nowrap text-inherit duration-200"
+					>My Cart</span
+				>
+			</div>
+			<div
+				routerLink="profile"
+				routerLinkActive="active"
+				class="text-gray-700 flex flex-col justify-center items-center cursor-pointer group/link"
+			>
+				<i
+					[ngClass]="
+						currentRoute() === '/profile'
+							? 'ri-user-fill'
+							: 'ri-user-line'
+					"
+					class="text-2xl text-inherit duration-200"
+				></i>
+				<span class="text-nowrap text-inherit duration-200">Me</span>
+			</div>
+		</div>
+	</div>
+</div>

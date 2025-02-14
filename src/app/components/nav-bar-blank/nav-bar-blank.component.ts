@@ -5,38 +5,65 @@ import {
 	ElementRef,
 	inject,
 	OnDestroy,
+	OnInit,
 	PLATFORM_ID,
 	signal,
 	viewChild,
 	WritableSignal,
 } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import {
+	NavigationEnd,
+	Router,
+	RouterLink,
+	RouterLinkActive,
+} from '@angular/router';
 import { NavbarBlankService } from '../../services/navbar-blank.service';
 import { fromEvent, map, Observable, Subject, takeUntil } from 'rxjs';
-import { isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser, NgClass } from '@angular/common';
 
 @Component({
 	selector: 'app-nav-bar-blank',
-	imports: [ReactiveFormsModule, FormsModule, RouterLink],
+	imports: [
+		ReactiveFormsModule,
+		FormsModule,
+		RouterLink,
+		NgClass,
+		RouterLinkActive,
+	],
 	templateUrl: './nav-bar-blank.component.html',
 	styleUrl: './nav-bar-blank.component.scss',
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavBarBlankComponent implements AfterViewInit, OnDestroy {
+export class NavBarBlankComponent implements OnInit, AfterViewInit, OnDestroy {
 	readonly _NavbarBlankService = inject(NavbarBlankService);
 
 	readonly _PLATFORM_ID = inject(PLATFORM_ID);
+
+	readonly _Router = inject(Router);
 
 	//Signal-Based Query
 	navbar = viewChild<ElementRef<HTMLDivElement>>('navbar');
 
 	q: WritableSignal<string> = signal('');
+
+	//used for the navigation style
+	currentRoute = signal('');
+
 	windowScrollY: WritableSignal<number> = signal(0);
+
+	//used for destroy subscribed observables
 	destroy$: Subject<void> = new Subject<void>();
 
 	// observable to handle window scroll to enhance change detection
 	windowScroll$!: Observable<number>;
+
+	ngOnInit(): void {
+		this._Router.events.subscribe((e) => {
+			if (e instanceof NavigationEnd) this.currentRoute.set(e.url);
+			console.log(this.currentRoute());
+		});
+	}
 
 	//Signal to get navbar Height
 	ngAfterViewInit(): void {
