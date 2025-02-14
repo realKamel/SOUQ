@@ -30,8 +30,8 @@ export class BlankComponent implements AfterViewInit {
 		if (isPlatformBrowser(this._PLATFORM_ID)) {
 			this._Renderer2.setStyle(
 				this.blankBody()?.nativeElement,
-				'marginTop',
-				`${this._NavbarBlankService.scrollMeasure() + 30}px`
+				'height',
+				`${this._NavbarBlankService.scrollMeasure()}px`
 			);
 		}
 	}
